@@ -238,6 +238,8 @@ a:hover{
 }
 
 .cart-dropdown .cart-list {
+    font-weight: 500;
+    color: black;
     max-height: 180px;
     overflow-y: scroll;
     margin-bottom: 15px;
