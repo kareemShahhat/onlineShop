@@ -128,7 +128,6 @@ $(document).ready(function(){
 });
 
 
-
 var bars4 =document.getElementById('www');
 var bars5 =document.getElementById('www2');
 var cat11 =document.querySelector('.categoryis');
@@ -148,23 +147,151 @@ dropcatr_btn.onclick = function(){
     dropcatr.classList.toggle("activcatd");
 }
 
-/*
-bars4.addEventListener('mouseover', (event) => {
-    cat11.classList.add("activcatd");
-});
-cat11.addEventListener('mouseover', (event) => {
-    cat11.classList.add("activcatd");
-});
-cat11.addEventListener('mouseout', (event) => {
-    cat11.classList.remove("activcatd");
-});
-*/
+const product = [
+    {
+        id: 1,
+        image: "assets/img/categ/cat1-removebg-preview.png",
+        title: "Headset Xmax Pro 3d",
+        price:350
+    },
+    {
+        id: 2,
+        image: "assets/img/product06.png",
+        title: "labtop msi x78s",
+        price:1260
+    },
+    {
+        id: 3,
+        image: "assets/img/product07.png",
+        title: "Samsung Glaxy 6s 5g",
+        price:600
+    },
+    {
+        id: 4,
+        image: "assets/img/product08.png",
+        title: "labtop dell xps 21d",
+        price:4000
+    },
+    {
+        id: 5,
+        image: "assets/img/product09.png",
+        title: "Headset Xmax Pro 3d",
+        price:350
+    },
+    {
+        id: 6,
+        image: "assets/img/product10.png",
+        title: "Camera LG oneshot",
+        price:600
+    },
+    {
+        id: 7,
+        image: "assets/img/product11.png",
+        title: "Xbox Controller",
+        price:430
+    },
+    {
+        id: 8,
+        image: "assets/img/product12.png",
+        title: "Airbuds pro",
+        price:1500
+    },
+    {
+        id: 9,
+        image: "assets/img/product01.png",
+        title: "Laptop apple mac2",
+        price:2300
+    },
+    {
+        id: 10,
+        image: "assets/img/product02.png",
+        title: "Headset Xmax Pro 3d",
+        price:350
+    },
+    {
+        id: 11,
+        image: "assets/img/product03.png",
+        title: "Apple m1 max",
+        price:3600
+    },
+    {
+        id: 12,
+        image: "assets/img/product04.png",
+        title: "Tablet air plus max",
+        price:740
+    }
+]
+
+const categoryis = [...new Set(product.map((item)=>
+    {return item}))]
+    let i = 0
+
+document.getElementById('item_cont').innerHTML = categoryis.map((item)=>
+{
+    var {image, title, price} = item ;
+    return (
+        `<div class="item">
+        <div class="box">
+            <div class="selbox"><span>Hot</span></div>
+            <div class="boximg">
+                <a href="item.html"><img src=${image} alt=""></a>
+            </div>
+            <div class="infos">
+                <h3>${title}</h3>
+                <ul>
+                    <li><i class="fas fa-star"></i></li>
+                    <li><i class="fas fa-star"></i></li>
+                    <li><i class="fas fa-star"></i></li>
+                    <li><i class="fas fa-star"></i></li>
+                    <li><i class="far fa-star"></i></li>
+                    <li><p>(5)</p></li>
+                </ul>
+                <h4>$ ${price} <strike>$750</strike></h4>`+
+                `<button onclick='addtocart(`+(i++)+`)'>Add To Cart <i class='fas fa-shopping-cart'></i></button>
+            </div>
+        </div>
+    </div>`
+    )
+}).join('')
+
+var cart =[]
+
+function addtocart(a){
+    cart.push({...categoryis[a]});
+    displaycart()
+}
+
+function displaycart(a){
+    let j = 0 , total = 0 ; 
+    document.getElementById('widgcart').innerHTML = cart.length;
+    document.getElementById('widgcart1').innerHTML = cart.length;
+    if (cart.length==0){
+        document.getElementById('cartItem').innerHTML = "Your Cart is empty";
+        document.getElementById('totalcat').innerHTML = "00";
+    }
+    else{
+        document.getElementById('cartItem').innerHTML = cart.map((items)=>{
+            var {image,title,price} = items;
+            total = total+price
+            document.getElementById('totalcat').innerHTML = total;
+            return(
+                `<div class="product-widget">
+                <div class="product-img">
+                    <img src=${image} alt="">
+                </div>
+                <div class="product-body">
+                    <h3 class="product-name"><a href="#">${title}</a></h3>
+                    <h4 class="product-price"><span class="qty"></span>$ ${price}.00</h4>
+                </div>
+                <button class="delete" onclick="delelmnt(`+(j++)+`)"><i class="fas fa-times"></i></button>
+            </div>`
+            )
+        }).join('')
+    }
+}
 
 
-
-
-// bars4.onclick = () =>{
-//     cat11.classList.toggle("activcatd");
-// }
-
-
+function delelmnt(a){
+    cart.splice(a,1);
+    displaycart()
+}
